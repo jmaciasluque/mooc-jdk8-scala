@@ -1,9 +1,6 @@
 import scala.io.Source
 
 
-/**
- * @author Banyuken (banyuken@gmail.com)
- */
 object Lesson2 {
   val WORD_REGEXP: String = "[- .:,]+"
 

@@ -1,6 +1,3 @@
-/**
- * @author Banyuken (banyuken@gmail.com)
- */
 object Lesson1 {
   /**
    * Run the exercises to ensure we got the right answers
