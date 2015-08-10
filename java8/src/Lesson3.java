@@ -4,15 +4,10 @@
  * JDK 8 MOOC Lesson 3 homework
  */
 
-import sun.security.pkcs11.wrapper.Functions;
-
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 
@@ -122,18 +117,18 @@ public class Lesson3 {
 
     List<String> wordList = fullWordList.createList(3000);
 
-    System.out.println("Sequential Levenshtein");
+    System.out.println("\nJava Sequential Levenshtein\n");
     measure("Sequential", () -> computeLevenshtein(wordList, false));
-    System.out.println("Parallel Levenshtein");
+    System.out.println("\nJava Parallel Levenshtein\n");
     measure("Parallel", () -> computeLevenshtein(wordList, true));
 
 //    From 3400 and below, sequential wins!
 //    List<String> anotherWordList = fullWordList.createList(3400);
     List<String> anotherWordList = fullWordList.createList(340000);
 
-    System.out.println("Sequential process words");
+    System.out.println("\nJava Sequential process words\n");
     measure("Sequential", () -> processWords(anotherWordList, false));
-    System.out.println("Parallel process words");
+    System.out.println("\nJava Parallel process words\n");
     measure("Parallel", () -> processWords(anotherWordList, true));
   }
 }
