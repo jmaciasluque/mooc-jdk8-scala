@@ -74,18 +74,13 @@ public class Lesson3 {
     final int LIST_SIZE = wordList.size();
     int[][] distances = new int[LIST_SIZE][LIST_SIZE];
 
-    if(parallel)
-      IntStream.range(0, LIST_SIZE).parallel().forEach(row ->
-        IntStream.range(0, LIST_SIZE).parallel().forEach(column ->
-          distances[row][column] = Levenshtein.lev(wordList.get(row), wordList.get(column))
-        )
-      );
-    else
-      IntStream.range(0, LIST_SIZE).forEach(row ->
-        IntStream.range(0, LIST_SIZE).forEach(column ->
-          distances[row][column] = Levenshtein.lev(wordList.get(row), wordList.get(column))
-        )
-      );
+    Supplier<Stream<String>> streamSupplier = parallel ? wordList::parallelStream : wordList::stream;
+
+    streamSupplier.get()
+        .map(a -> streamSupplier.get()
+            .mapToInt(b -> Levenshtein.lev(a, b))
+            .toArray())
+        .collect(Collectors.toList()).toArray(distances);
 
     return distances;
   }
@@ -99,9 +94,21 @@ public class Lesson3 {
    */
   static List<String> processWords(List<String> wordList, boolean parallel) {
 
+    Supplier<Stream<String>> streamSupplier = parallel ? wordList::parallelStream : wordList::stream;
 
-
-    return null;
+    return
+        streamSupplier.get()
+            .sorted()
+            .map(String::toLowerCase)
+            .map(String::toUpperCase)
+            .filter(word -> !word.startsWith("a"))
+            .filter(word -> !word.startsWith("A"))
+            .filter(word -> !word.startsWith("z"))
+            .filter(word -> !word.startsWith("Z"))
+            .filter(word -> !word.startsWith("m"))
+            .filter(word -> !word.startsWith("M"))
+            .distinct()
+            .collect(Collectors.toList());
   }
 
   /**
@@ -112,12 +119,21 @@ public class Lesson3 {
    */
   public static void main(String[] args) throws IOException {
     RandomWords fullWordList = new RandomWords();
-    List<String> wordList = fullWordList.createList(1000);
 
+    List<String> wordList = fullWordList.createList(3000);
+
+    System.out.println("Sequential Levenshtein");
     measure("Sequential", () -> computeLevenshtein(wordList, false));
+    System.out.println("Parallel Levenshtein");
     measure("Parallel", () -> computeLevenshtein(wordList, true));
 
-//    measure("Sequential", () -> processWords(wordList, false));
-//    measure("Parallel", () -> processWords(wordList, true));
+//    From 3400 and below, sequential wins!
+//    List<String> anotherWordList = fullWordList.createList(3400);
+    List<String> anotherWordList = fullWordList.createList(340000);
+
+    System.out.println("Sequential process words");
+    measure("Sequential", () -> processWords(anotherWordList, false));
+    System.out.println("Parallel process words");
+    measure("Parallel", () -> processWords(anotherWordList, true));
   }
 }
