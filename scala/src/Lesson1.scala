@@ -29,8 +29,12 @@ object Lesson1 {
    * of Strings provided.
    */
   private def exercise1() {
-    val list = List("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
-    println(list.map(_.charAt(0)).mkString)
+    val result = new StringBuilder()
+
+    List("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
+      .foreach(word => result.append(word.charAt(0)))
+
+    println(result)
   }
 
   /**
