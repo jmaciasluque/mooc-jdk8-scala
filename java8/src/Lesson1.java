@@ -42,10 +42,10 @@ public class Lesson1 {
    */
   private void exercise1() {
     StringBuilder result = new StringBuilder();
+
     Arrays.asList("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
-      .stream()
-      .map(word -> word.charAt(0))
-      .forEach(result::append);
+      .forEach(word -> result.append(word.charAt(0)));
+
     System.out.println(result);
   }
 
@@ -55,9 +55,10 @@ public class Lesson1 {
    * Remove the words that have odd lengths from the list.
    */
   private void exercise2() {
-    List<String> list = new ArrayList<>(Arrays.asList(
-        "alpha", "bravo", "charlie", "delta", "echo", "foxtrot"));
+    List<String> list = new ArrayList<>(Arrays.asList("alpha", "bravo", "charlie", "delta", "echo", "foxtrot"));
+
     list.removeIf(word -> (word.length() % 2) != 0);
+
     System.out.println(list);
   }
 
@@ -67,10 +68,11 @@ public class Lesson1 {
    * Replace every word in the list with its upper case equivalent.
    */
   private void exercise3() {
-    Arrays.asList("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
-      .stream()
-      .map(word -> (word.toUpperCase()))
-      .forEach(System.out::println);
+    List<String> list = Arrays.asList("alpha", "bravo", "charlie", "delta", "echo", "foxtrot");
+
+    list.replaceAll(String::toUpperCase);
+
+    System.out.println(list);
   }
 
   /**
@@ -88,8 +90,9 @@ public class Lesson1 {
     StringBuilder result = new StringBuilder();
     map.entrySet()
       .forEach(entry ->
-          result.append(entry.getKey())
-              .append(entry.getValue()));
+        result.append(entry.getKey())
+          .append(entry.getValue()));
+
     System.out.println(result.toString());
   }
 
@@ -101,7 +104,7 @@ public class Lesson1 {
   private void exercise5() {
     new Thread(
       () -> Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-              .forEach(System.out::print))
+        .forEach(System.out::print))
       .start();
   }
 
