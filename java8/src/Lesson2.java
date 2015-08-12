@@ -51,10 +51,16 @@ public class Lesson2 {
    * lower case and print them out.
    */
   private void exercise1() {
-    Arrays.asList("The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG")
-      .stream()
-      .map(String::toLowerCase)
-      .forEach(System.out::println);
+    List<String> list = Arrays.asList(
+      "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
+
+    List<String> newList =
+      list
+        .stream()
+        .map(String::toLowerCase)
+        .collect(Collectors.toList());
+
+    newList.forEach(System.out::println);
   }
 
   /**
@@ -64,11 +70,17 @@ public class Lesson2 {
    * odd length
    */
   private void exercise2() {
-    Arrays.asList("The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG")
-      .stream()
-      .filter(word -> word.length() % 2 != 0)
-      .map(String::toLowerCase)
-      .forEach(System.out::println);
+    List<String> list = Arrays.asList(
+      "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
+
+    List<String> newList =
+      list
+        .stream()
+        .filter(word -> word.length() % 2 != 0)
+        .map(String::toLowerCase)
+        .collect(Collectors.toList());
+
+    newList.forEach(System.out::println);
   }
 
   /**
@@ -79,13 +91,16 @@ public class Lesson2 {
    */
   private void exercise3() {
     List<String> list = Arrays.asList(
-        "The", "quick", "brown", "fox", "jumped", "over", "the", "lazy", "dog");
+      "The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG");
 
-    System.out.println(
-        list.stream()
-            .skip(1)
-            .limit(3)
-            .collect(Collectors.joining("-")));
+    String string =
+      list
+        .stream()
+        .skip(1)
+        .limit(3)
+        .collect(Collectors.joining("-"));
+
+    System.out.println(string);
   }
 
   /**
@@ -93,8 +108,8 @@ public class Lesson2 {
    */
   private void exercise4() throws IOException {
     try (BufferedReader reader = Files.newBufferedReader(
-            Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
-        System.out.println(reader.lines().count());
+        Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
+      System.out.println(reader.lines().count());
     }
   }
   
@@ -107,10 +122,14 @@ public class Lesson2 {
   private void exercise5() throws IOException {
     try (BufferedReader reader = Files.newBufferedReader(
       Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
-        reader.lines().
-          flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
+
+      List<String> newWords =
+        reader.lines()
+          .flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
           .distinct()
-          .forEach(System.out::println);
+          .collect(Collectors.toList());
+
+      newWords.forEach(System.out::println);
     }
   }
   
@@ -122,12 +141,16 @@ public class Lesson2 {
   private void exercise6() throws IOException {
     try (BufferedReader reader = Files.newBufferedReader(
       Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
+
+      List<String> newWords =
         reader.lines()
           .flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
           .map(String::toLowerCase)
           .distinct()
           .sorted()
-          .forEach(System.out::println);
+          .collect(Collectors.toList());
+
+      newWords.forEach(System.out::println);
     }
   }
   
@@ -137,16 +160,16 @@ public class Lesson2 {
   private void exercise7() throws IOException {
     try (BufferedReader reader = Files.newBufferedReader(
       Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
-      reader.lines()
-        .flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
-        .map(String::toLowerCase)
-        .distinct()
-        .sorted((x, y) -> {
-          if (x.length() < y.length()) return -1;
-          else if (x.length() > y.length()) return 1;
-          else return 0;
-        })
-        .forEach(System.out::println);
+
+      List<String> newWords =
+        reader.lines()
+          .flatMap(line -> Stream.of(line.split(WORD_REGEXP)))
+          .map(String::toLowerCase)
+          .distinct()
+          .sorted((aString, anotherString) -> aString.length() - anotherString.length())
+          .collect(Collectors.toList());
+
+      newWords.forEach(System.out::println);
     }
   }
 
