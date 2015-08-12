@@ -1,3 +1,4 @@
+import scala.collection.immutable.TreeMap
 import scala.collection.mutable
 
 
@@ -72,11 +73,9 @@ object Lesson1 {
    */
   private def exercise4() {
     val result = new StringBuilder()
-    val map = Map(("c", 3), ("b", 2), ("a", 1))
+    val map = TreeMap(("c", 3), ("b", 2), ("a", 1))
 
     map
-      .toSeq
-      .sortBy(_._1)
       .map(entry => entry._1 + entry._2)
       .foreach(result.append)
 
