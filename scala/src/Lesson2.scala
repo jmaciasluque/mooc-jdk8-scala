@@ -62,16 +62,6 @@ object Lesson2 {
    * Count the number of lines in the file using the BufferedReader provided
    */
   private def exercise4() {
-    // hybrid way
-//        try {
-//          val reader = Files.newBufferedReader(Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)
-//          try {
-//            println(reader.lines.count) // hybrid
-//          } finally {
-//            if (reader != null) reader.close()
-//          }
-//        }
-    // more scala way
     println(Source.fromFile("SonnetI.txt").getLines().length)
   }
 
