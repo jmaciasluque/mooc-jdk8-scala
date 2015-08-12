@@ -1,3 +1,6 @@
+import scala.collection.mutable
+
+
 object Lesson1 {
   /**
    * Run the exercises to ensure we got the right answers
@@ -44,7 +47,8 @@ object Lesson1 {
    */
   private def exercise2() {
     List("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
-      .filterNot(_.length % 2 != 0).foreach(println)
+      .filterNot(_.length % 2 != 0)
+      .foreach(println)
   }
 
   /**
@@ -53,8 +57,11 @@ object Lesson1 {
    * Replace every word in the list with its upper case equivalent.
    */
   private def exercise3() {
-    List("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
-      .map(_.toUpperCase).foreach(println)
+    val list = mutable.MutableList("alpha", "bravo", "charlie", "delta", "echo", "foxtrot")
+
+    list.transform(_.toUpperCase)
+
+    println(list)
   }
 
   /**
@@ -65,7 +72,13 @@ object Lesson1 {
    */
   private def exercise4() {
     val map = Map(("c", 3), ("b", 2), ("a", 1))
-    println(map.toSeq.sortBy(_._1).map(entry => entry._1 + entry._2).mkString)
+    println(
+      map
+        .toSeq
+        .sortBy(_._1)
+        .map(entry => entry._1 + entry._2)
+        .mkString
+    )
   }
 
   /**
@@ -76,7 +89,8 @@ object Lesson1 {
   private def exercise5() {
      new Thread(new Runnable {
       def run() {
-        List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).foreach(print)
+        List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+          .foreach(print)
       }
     }).start()
   }
