@@ -32,8 +32,11 @@ object Lesson2 {
    * lower case and print them out.
    */
   private def exercise1() {
-    List("The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG")
-      .map(_.toLowerCase).foreach(println)
+    val list =
+      List("The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG")
+        .map(_.toLowerCase)
+
+    list.foreach(println)
   }
 
   /**
@@ -43,8 +46,12 @@ object Lesson2 {
    * odd length
    */
   private def exercise2() {
-    List("The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG")
-      .filter(_.length % 2 != 0).map(_.toLowerCase).foreach(println)
+    val list =
+      List("The", "Quick", "BROWN", "Fox", "Jumped", "Over", "The", "LAZY", "DOG")
+        .filter(_.length % 2 != 0)
+        .map(_.toLowerCase)
+
+    list.foreach(println)
   }
 
   /**
@@ -72,12 +79,14 @@ object Lesson2 {
    * HINT: A regular expression, WORD_REGEXP, is already defined for your use.
    */
   private def exercise5() {
-    Source.fromFile("SonnetI.txt")
-      .getLines()
-      .flatMap(line => line.split(WORD_REGEXP))
-      .toSeq
-      .distinct
-      .foreach(println)
+    val list =
+      Source.fromFile("SonnetI.txt")
+        .getLines()
+        .flatMap(line => line.split(WORD_REGEXP))
+        .toSeq
+        .distinct
+
+    list.foreach(println)
   }
 
   /**
@@ -86,28 +95,32 @@ object Lesson2 {
    * sorted by natural order.  Print the contents of the list.
    */
   private def exercise6() {
-    Source.fromFile("SonnetI.txt")
-      .getLines()
-      .flatMap(line => line.split(WORD_REGEXP))
-      .map(_.toLowerCase)
-      .toSeq
-      .distinct
-      .sorted
-      .foreach(println)
+    val list =
+      Source.fromFile("SonnetI.txt")
+        .getLines()
+        .flatMap(line => line.split(WORD_REGEXP))
+        .map(_.toLowerCase)
+        .toSeq
+        .distinct
+        .sorted
+
+    list.foreach(println)
   }
 
   /**
    * Modify exercise6 so that the words are sorted by length
    */
   private def exercise7() {
-    Source.fromFile("SonnetI.txt")
-      .getLines()
-      .flatMap(line => line.split(WORD_REGEXP))
-      .map(_.toLowerCase)
-      .toSeq
-      .distinct
-      .sortBy(_.length)
-      .foreach(println)
+    val list =
+      Source.fromFile("SonnetI.txt")
+        .getLines()
+        .flatMap(line => line.split(WORD_REGEXP))
+        .map(_.toLowerCase)
+        .toSeq
+        .distinct
+        .sortBy(_.length)
+
+    list.foreach(println)
   }
 
   /**
