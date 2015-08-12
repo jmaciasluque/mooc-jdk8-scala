@@ -71,14 +71,16 @@ object Lesson1 {
    * into a single string, in iteration order.
    */
   private def exercise4() {
+    val result = new StringBuilder()
     val map = Map(("c", 3), ("b", 2), ("a", 1))
-    println(
-      map
-        .toSeq
-        .sortBy(_._1)
-        .map(entry => entry._1 + entry._2)
-        .mkString
-    )
+
+    map
+      .toSeq
+      .sortBy(_._1)
+      .map(entry => entry._1 + entry._2)
+      .foreach(result.append)
+
+    println(result)
   }
 
   /**
