@@ -4,6 +4,7 @@
  * JDK 8 MOOC Lesson 3 homework
  */
 
+
 import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
@@ -72,10 +73,10 @@ public class Lesson3 {
     Supplier<Stream<String>> streamSupplier = parallel ? wordList::parallelStream : wordList::stream;
 
     streamSupplier.get()
-        .map(a -> streamSupplier.get()
-            .mapToInt(b -> Levenshtein.lev(a, b))
-            .toArray())
-        .collect(Collectors.toList()).toArray(distances);
+      .map(a -> streamSupplier.get()
+        .mapToInt(b -> Levenshtein.lev(a, b))
+        .toArray())
+      .collect(Collectors.toList()).toArray(distances);
 
     return distances;
   }
@@ -92,18 +93,18 @@ public class Lesson3 {
     Supplier<Stream<String>> streamSupplier = parallel ? wordList::parallelStream : wordList::stream;
 
     return
-        streamSupplier.get()
-            .sorted()
-            .map(String::toLowerCase)
-            .map(String::toUpperCase)
-            .filter(word -> !word.startsWith("a"))
-            .filter(word -> !word.startsWith("A"))
-            .filter(word -> !word.startsWith("z"))
-            .filter(word -> !word.startsWith("Z"))
-            .filter(word -> !word.startsWith("m"))
-            .filter(word -> !word.startsWith("M"))
-            .distinct()
-            .collect(Collectors.toList());
+      streamSupplier.get()
+        .sorted()
+        .map(String::toLowerCase)
+        .map(String::toUpperCase)
+        .filter(word -> !word.startsWith("a"))
+        .filter(word -> !word.startsWith("A"))
+        .filter(word -> !word.startsWith("z"))
+        .filter(word -> !word.startsWith("Z"))
+        .filter(word -> !word.startsWith("m"))
+        .filter(word -> !word.startsWith("M"))
+        .distinct()
+        .collect(Collectors.toList());
   }
 
   /**

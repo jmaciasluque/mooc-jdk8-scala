@@ -1,5 +1,4 @@
 import scala.collection.GenSeq
-import scala.collection.JavaConversions._
 
 
 object Lesson3 {
@@ -16,8 +15,6 @@ object Lesson3 {
    * @return Matrix of Levenshtein distances
    */
   def computeLevenshtein(wordList: List[String], parallel: Boolean): Array[Array[Int]] = {
-    val LIST_SIZE: Int = wordList.size
-
     maybeParallel(parallel, wordList).map((a) =>
       maybeParallel(parallel, wordList).map((b) =>
         Levenshtein.lev(a, b)).toArray
@@ -55,12 +52,12 @@ object Lesson3 {
 
   def main(args: Array[String]) {
     val fullWordList: RandomWords = new RandomWords
-    val wordList = fullWordList.createList(3000).toList
+    val wordList = fullWordList.createList(3000)
     println("\nScala Sequential Levenshtein\n")
     measure("Sequential", () => computeLevenshtein(wordList, false))
     println("\nScala Parallel Levenshtein\n")
     measure("Parallel", () => computeLevenshtein(wordList, true))
-    val anotherWordList: List[String] = fullWordList.createList(340000).toList
+    val anotherWordList = fullWordList.createList(3000)
     println("\nScala Sequential process words\n")
     measure("Sequential", () => processWords(anotherWordList, false))
     println("\nScala Parallel process words\n")

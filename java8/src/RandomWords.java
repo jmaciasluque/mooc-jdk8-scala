@@ -30,12 +30,12 @@ public class RandomWords {
    * @throws IOException If the source words file cannot be read
    */
   public RandomWords() throws IOException {   
-      try (BufferedReader reader = Files.newBufferedReader(Paths.get("words.txt"))) {
-        sourceWords =
-            reader
-                .lines()
-                .collect(Collectors.toList());
-      }
+    try (BufferedReader reader = Files.newBufferedReader(Paths.get("words.txt"))) {
+      sourceWords =
+        reader
+          .lines()
+          .collect(Collectors.toList());
+    }
   }
 
   /**
@@ -45,11 +45,11 @@ public class RandomWords {
    * @return The created list
    */
   public List<String> createList(int listSize) {
-      return
-          new Random()
-              .ints(listSize, 0, sourceWords.size())
-              .mapToObj(sourceWords::get)
-              .collect(Collectors.toList());
+    return
+      new Random()
+        .ints(listSize, 0, sourceWords.size())
+        .mapToObj(sourceWords::get)
+        .collect(Collectors.toList());
   }
 
   /**
