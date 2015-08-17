@@ -4,8 +4,8 @@ import scala.util.Random
 
 class RandomWords {
 
-  val sourceWords: List[String] =
-    Source.fromFile("words.txt").getLines().toList
+  val sourceWords: Array[String] =
+    Source.fromFile("words.txt").getLines().toArray
 
   def createList(listSize: Int): List[String] = {
     Seq.fill[Int](listSize)(Random.nextInt(sourceWords.size))
@@ -14,6 +14,6 @@ class RandomWords {
   }
 
   def allWords: List[String] = {
-    sourceWords
+    sourceWords.toList
   }
 }
